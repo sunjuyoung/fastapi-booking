@@ -1,0 +1,62 @@
+from datetime import datetime, timezone
+from sqlmodel import SQLModel, Field, func, Relationship
+from pydantic import EmailStr, AwareDatetime
+from sqlalchemy import UniqueConstraint
+from sqlalchemy_utc import UtcDateTime
+
+class User(SQLModel, table=True):
+  __tablename__= "users"
+  __table_args__ =(
+    UniqueConstraint("email", name="uq_email"),
+  )
+  
+  id: int = Field(default=None, primary_key=True)
+  username: str = Field(unique=True, nullable=False, max_length=40)
+  email: EmailStr = Field(unique=True, nullable=False)
+  password: str = Field(nullable=False)
+  is_host: bool = Field(default=False)
+  #server_default 데이터베이스 영역에서 기본값을 설정하는 옵션
+  #onupdate ORM에 객체데이터가 업데이트 시 파이썬 객체를 받아서 사용할 수 있도록 하는 옵션(ORM영역)
+  created_at: AwareDatetime = Field(
+    default=None, 
+    nullable=False,
+    sa_type=UtcDateTime,
+    sa_column_kwargs={"server_default": func.now()})
+  
+  updated_at: AwareDatetime = Field(
+    default=None,
+    nullable=False,
+    sa_type=UtcDateTime,
+    sa_column_kwargs={"server_default": func.now(), 
+                      "onupdate": lambda : datetime.now(timezone.utc) })
+  
+  
+
+
+class OAuthAccount(SQLModel, table=True):
+  __tablename__ = "oauth_accounts"
+  __table_args__ = (
+    UniqueConstraint("provider", "provider_account_id", name="uq_provider_account_id"),
+  )
+  
+  id: int = Field(default=None, primary_key=True)
+  
+  user_id: int = Field(foreign_key="users.id", nullable=False)
+  user: User = Relationship()
+  
+  provider: str = Field(nullable=False, max_length=10, description="OAuth 제공자")
+  provider_account_id: str = Field(nullable=False, max_length=128, description="OAuth 제공자 계정 ID")
+  
+  
+  
+  created_at: AwareDatetime = Field(
+    default=None,
+    nullable=False, 
+    sa_type=UtcDateTime,
+    sa_column_kwargs={"server_default": func.now()})
+  
+  updated_at: AwareDatetime = Field(
+    default=None, 
+    nullable=False, 
+    sa_type=UtcDateTime, 
+    sa_column_kwargs={"server_default": func.now(), "onupdate": lambda : datetime.now(timezone.utc)})
