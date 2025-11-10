@@ -1,0 +1,128 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment (venv)
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Poetry
+# poetry.lock  # 보통은 커밋하는 것을 권장 (의존성 버전 고정)
+.poetry/
+poetry.toml  # 로컬 설정만 제외하고 싶은 경우
+
+# VSCode
+.vscode/
+# .vscode/settings.json  # 팀 공유 설정은 커밋하고 싶다면 주석 해제
+# .vscode/launch.json
+# .vscode/extensions.json
+*.code-workspace
+.history/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+.env.local
+.env.*.local
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+
+# Logs
+*.log
+logs/
+log/
+*.log.*
+
+# Testing
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.hypothesis/
+coverage.xml
+*.cover
+.cache
+nosetests.xml
+
+# Type checking
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pytype/
+.pyre/
+
+# FastAPI specific
+uploads/
+static/media/
+temp/
+tmp/
+
+# Docker
+# docker-compose.override.yml  # 로컬 override만 제외하고 싶다면
+*.env.docker
+.docker/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+*.ipynb
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Alembic (DB Migration)
+# alembic/versions/  # migration 파일은 보통 커밋
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# Backup files
+*.bak
+*.swp
+*.swo
+*~
+
+# Local development
+local_settings.py
+instance/
+
+# Documentation builds
+docs/_build/
+site/
