@@ -34,3 +34,7 @@ def get_range_days_of_month(year: int, month: int):
     
   return result
   
+# import calendar
+
+# cal = calendar.Calendar(calendar.SUNDAY)
+# print(list(cal.itermonthdays(2025,11)))
