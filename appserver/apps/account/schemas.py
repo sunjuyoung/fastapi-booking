@@ -32,3 +32,7 @@ class UserOut(SQLModel):
     username: str
     display_name: str
     is_host: bool
+    
+class LoginPayload(SQLModel):
+    username: str = Field(min_length=4, max_length=40, description="사용자 계정 ID")
+    password: str = Field(min_length=4, max_length=128, description="사용자 비밀번호")

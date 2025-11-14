@@ -22,8 +22,8 @@ class User(SQLModel, table=True):
   username: str = Field(min_length=4, max_length=40, description="사용자 계정 ID")
   email: EmailStr = Field(unique=True, max_length=128, description="사용자 이메일")
   display_name: str = Field(min_length=4, max_length=40, description="사용자 표시 이름")
-  password: str = Field(min_length=8, max_length=128, description="사용자 비밀번호")
   is_host: bool = Field(default=False, description="사용자가 호스트인지 여부")
+  hashed_password: str = Field(min_length=4, max_length=128, description="사용자 비밀번호")
   
   #OAuthAccount 문자열로 표기하면 해당 자료형을 지연 로딩, 파이썬에서는 문자열 각주 또는 전방 참조라고 합니다.
   oauth_accounts: list["OAuthAccount"] = Relationship(back_populates="user")
